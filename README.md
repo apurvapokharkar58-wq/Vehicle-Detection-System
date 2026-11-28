@@ -1,68 +1,202 @@
-# Vehicle Detection and Counting System
+# 🚗 Vehicle Detection and Analytics System
 
-## Project Overview
-A Python-based computer vision project that detects, tracks, and counts vehicles in traffic videos using YOLO11 and OpenCV.
+A computer vision-based vehicle analytics application that detects, tracks, classifies, and counts vehicles in traffic videos using YOLO11, OpenCV, and ByteTrack. The system also estimates vehicle colors, detects line crossings, stores traffic events in PostgreSQL, and displays analytics through a web dashboard.
 
-## Technologies Used
-- Python
-- OpenCV
-- YOLO11 (Ultralytics)
-- ByteTrack
-- CSV
+## 📌 Project Overview
 
-## Features
-- Vehicle detection in traffic videos
-- Vehicle tracking using ByteTrack
-- Vehicle counting by category
-- Video output with detection annotations
-- CSV report generation
+The Vehicle Detection and Analytics System aims to provide automated traffic monitoring and vehicle analytics.
 
-## How to Run
+The application processes traffic videos, identifies vehicles, assigns tracking IDs, estimates vehicle colors, detects line-crossing events, and stores relevant information in a PostgreSQL database.
 
-1. Clone this repository.
-2. Create and activate a virtual environment.
-3. Install dependencies:
+A custom web dashboard built using HTML, CSS, JavaScript, and Flask presents vehicle statistics, color analytics, recent events, and the annotated tracking video.
 
-   pip install -r requirements.txt
+## 🛠️ Technologies Used
 
-4. Add your traffic video inside the videos folder.
-5. Run:
+| Technology | Purpose |
+|---|---|
+| Python | Backend development |
+| YOLO11n | Vehicle detection |
+| OpenCV | Video processing |
+| ByteTrack | Multi-object tracking |
+| NumPy | Image processing |
+| Flask | Web application backend |
+| HTML, CSS, JavaScript | Frontend dashboard |
+| PostgreSQL | Event data storage |
+| CSV | Analytics reports |
+| MediaMTX | RTSP stream testing |
+| Google Colab | NVIDIA GPU testing |
+| Git and GitHub | Version control |
 
-   python detect.py
+## ✨ Features
 
-## Output Files
-- tracking_output.mp4
-- vehicle_report.csv
+- Vehicle detection using YOLO11n.
+- Vehicle tracking using ByteTrack.
+- Vehicle classification into Car, Bike, Bus, and Truck.
+- Unique vehicle counting.
+- Line-crossing detection.
+- Vehicle movement direction estimation (Up/Down).
+- Basic vehicle color estimation using HSV color space.
+- PostgreSQL storage of vehicle crossing events.
+- CSV report generation.
+- Custom responsive web dashboard.
+- Vehicle analytics and color charts.
+- Recent vehicle event history.
+- Annotated vehicle tracking video playback.
+- Periodic dashboard data refresh.
 
-## Note
-The YOLO11n pretrained model weights and traffic video are not included in this repository.
+## 🏗️ Project Architecture
 
-## GPU Testing Results (Google Colab)
+```text
+              Traffic Video
+                    |
+                    v
+              YOLO11 Detection
+                    |
+                    v
+              ByteTrack Tracking
+                    |
+                    v
+          Vehicle Color Estimation
+                    |
+                    v
+           Line Crossing Detection
+                    |
+                    v
+             PostgreSQL Database
+                    |
+                    v
+              Flask Backend
+                    |
+                    v
+          HTML / CSS / JavaScript
+                    |
+                    v
+            Analytics Dashboard
+```
 
-The vehicle detection and tracking pipeline was tested using a free NVIDIA Tesla T4 GPU in Google Colab.
+MediaMTX RTSP ingestion was also tested separately as part of the video ingestion prototype. Integration of the RTSP stream into the native DeepStream pipeline remains pending.
 
-### Test Configuration
-- GPU: NVIDIA Tesla T4
-- Detection Model: YOLO11n
-- Tracking Algorithm: ByteTrack
-- Input Video: Sample_Traffic.mp4
-- Image Size: 416
-- Confidence Threshold: 0.35
-- Frames Processed: 298
+## 📂 Project Structure
 
-### Test Results
+```text
+Vehicle-Detection-System/
+│
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+│
+├── deepstream/
+│   ├── README.md
+│   └── config/
+│       └── pipeline.ini
+│
+├── videos/
+│   └── Sample_Traffic.mp4
+│
+├── detect.py
+├── color_classifier.py
+├── database.py
+├── web_app.py
+├── dashboard.py
+├── requirements.txt
+├── vehicle_report.csv
+├── line_crossing_events.csv
+├── vehicle_color_results.csv
+├── README.md
+└── .gitignore
+```
 
-| Test | Result |
-|---|---:|
-| Vehicle detection | Successful |
-| Vehicle tracking | Successful |
-| Tracking IDs verified | Successful |
-| Unique line crossings | 12 |
-| Down crossings | 12 |
-| Up crossings | 0 |
+Note: Video files, model weights, virtual environments, and database credentials are excluded from the GitHub repository where appropriate.
 
-### Conclusion
+## ⚙️ Installation and Setup
 
-The YOLO-based vehicle detection, ByteTrack tracking, unique vehicle counting, and line-crossing direction detection prototypes were successfully tested on an NVIDIA Tesla T4 GPU.
+### 1. Clone the Repository
 
-**Note:** Native NVIDIA DeepStream SDK integration is still pending. The GPU tests were performed using Ultralytics YOLO and ByteTrack.
+```bash
+git clone https://github.com/apurvapokharkar58-wq/Vehicle-Detection-System.git
+```
+
+```bash
+cd Vehicle-Detection-System
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Activate on Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install Dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 4. Add the Input Video
+
+Create a `videos` folder and place your traffic video inside it.
+
+The current detection script uses:
+
+```text
+videos/Sample_Traffic.mp4
+```
+
+### 5. Configure PostgreSQL
+
+Install and start PostgreSQL.
+
+Create a database named:
+
+```sql
+CREATE DATABASE vehicle_analytics;
+```
+
+Create the vehicle events table:
+
+```sql
+CREATE TABLE vehicle_events (
+    id SERIAL PRIMARY KEY,
+    vehicle_id INTEGER NOT NULL,
+    vehicle_type VARCHAR(50) NOT NULL,
+    event_timestamp TIMESTAMP NOT NULL,
+    direction VARCHAR(10) NOT NULL,
+    color VARCHAR(30)
+);
+```
+
+Create a `.env` file in the project root:
+
+```text
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=vehicle_analytics
+DB_USER=postgres
+DB_PASSWORD=your_postgresql_password
+```
+
+Replace the password with your own PostgreSQL password. Do not upload `.env` to GitHub.
+
+## ▶️ Running the Application
+
+### 1. Run Vehicle Detection
+
+```bash
+python detect.py
+```
+
+This processes the input traffic video and generates detection, tracking, and analytics results.
+
+### 2. Start the Web Dashboard
+
+Open another terminal in the project directory, activate the virtual environment, and run:
+
+```bash
+python web_app
