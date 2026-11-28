@@ -95,11 +95,13 @@ try:
                 x1, y1, x2, y2 = box
                 center_y = (y1 + y2) // 2
 
-                                # Extract vehicle image
-                vehicle_image = frame[
+               # Extract vehicle image from original frame
+                original_frame = result.orig_img
+
+                vehicle_image = original_frame[
                     max(0, y1):min(height, y2),
                     max(0, x1):min(width, x2)
-                ]
+]
 
                 # Classify vehicle colour
                 vehicle_color = classify_vehicle_color(vehicle_image)

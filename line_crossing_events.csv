@@ -1,0 +1,13 @@
+Vehicle ID,Vehicle Type,Color,Timestamp,Direction
+3,Bus,Green,2026-11-28 14:29:32,Down
+1,Car,Blue,2026-11-28 14:29:33,Down
+9,Car,Blue,2026-11-28 14:29:33,Down
+10,Car,Purple,2026-11-28 14:29:35,Down
+21,Car,Blue,2026-11-28 14:29:35,Down
+29,Car,Blue,2026-11-28 14:29:37,Down
+4,Car,Blue,2026-11-28 14:29:38,Down
+41,Car,Blue,2026-11-28 14:29:39,Down
+48,Car,Blue,2026-11-28 14:29:40,Down
+60,Bike,Black,2026-11-28 14:29:40,Down
+72,Truck,Blue,2026-11-28 14:29:41,Down
+92,Truck,Blue,2026-11-28 14:29:43,Down
