@@ -1,6 +1,6 @@
-Vehicle Type,Unique Count
-Car,4
-Bike,0
-Bus,0
-Truck,1
-Total,5
+Vehicle Type,Detected Count,Line Crossing Count
+Car,20,8
+Bike,10,1
+Bus,10,1
+Truck,6,2
+Total,46,12

@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Analytics Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <h2>🚗 VehicleAI</h2>
+
+        <nav>
+            <a class="active" href="#">Dashboard</a>
+            <a href="#analytics">Analytics</a>
+            <a href="#events">Vehicle Events</a>
+            <a href="#monitor">Live Monitor</a>
+        </nav>
+
+        <p class="sidebar-footer">Vehicle Analytics System</p>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Vehicle Analytics</h1>
+                <p>Real-Time Traffic Monitoring System</p>
+            </div>
+
+            <span class="status">
+                ● System Dashboard
+            </span>
+        </header>
+
+        <section class="metrics">
+
+            <div class="metric-card">
+                <p>Total Vehicles</p>
+                <h2 id="totalVehicles">46</h2>
+            </div>
+
+            <div class="metric-card">
+                <p>Line Crossings</p>
+                <h2 id="totalCrossings">12</h2>
+            </div>
+
+            <div class="metric-card">
+                <p>Cars</p>
+                <h2 id="totalCars">20</h2>
+            </div>
+
+            <div class="metric-card">
+                <p>Bikes</p>
+                <h2 id="totalBikes">10</h2>
+            </div>
+
+        </section>
+
+        <section class="content-grid" id="analytics">
+
+            <div class="panel">
+                <h2>Vehicle Analytics</h2>
+                <div id="vehicleChart">
+                    <p>Vehicle type chart will appear here.</p>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Vehicle Colors</h2>
+                <div id="colorChart">
+                    <p>Vehicle color chart will appear here.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="panel video-panel" id="monitor">
+            <h2>Vehicle Tracking Monitor</h2>
+
+            <video controls width="100%">
+                <source src="/video" type="video/mp4">
+                Your browser does not support video playback.
+            </video>
+        </section>
+
+        <section class="panel" id="events">
+            <h2>Recent Vehicle Events</h2>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <th>Vehicle Type</th>
+                            <th>Color</th>
+                            <th>Direction</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="eventsTable">
+                        <tr>
+                            <td colspan="5">Waiting for database connection...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
